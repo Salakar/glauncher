@@ -1,0 +1,32 @@
+{
+  "name": "glauncher-sample",
+  "description": "Automatically boots your node app on google cloud compute instances using the startup script meta. This pulls the latest changes from the branch you specified, runs npm install and the execs the app. Useful for Google Cloud load balanced instances that automatically scale. ",
+  "version": "0.1.0",
+  "main": "lib/index.js",
+  "author": "salakar",
+  "repository": "salakar/glauncher",
+  "license": "MIT",
+  "scripts": {
+    "compile": "babel src --out-dir lib",
+    "compile-watch": "babel src --watch --out-dir lib",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "prepublish": "npm run compile",
+    "test-include": "cd test/sample && node app.js",
+    "test-require-arg": "cd test/sample && node --require ./../../lib ./../../lib/blank"
+  },
+  "devDependencies": {
+    "babel-cli": "*",
+    "babel-preset-es2015-node4": "*",
+    "coveralls": "*",
+    "chai": "*",
+    "isparta": "*",
+    "mocha": "*",
+    "sinon": "*"
+  },
+  "dependencies": {
+    "bluebird": "^3.3.4",
+    "npm": "^3.8.5",
+    "npmi": "^1.0.1",
+    "simple-git": "^1.31.0"
+  }
+}
