@@ -9,11 +9,13 @@
 ![dev dependencies](https://img.shields.io/david/dev/salakar/glauncher.svg)
 ![License](https://img.shields.io/npm/l/glauncher.svg)
 
+## WIP
+
 Automatically boots your node app on google cloud compute instances using the startup script meta.
 
 This can be configured to pull the latest git changes from a specified branch, run npm install and then execs the app start script.
 
-Useful for Google Cloud load balanced instances that automatically scale. 
+Useful for Google Cloud load balanced instances that automatically scale.
 
 ## Getting Started
 
