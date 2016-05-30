@@ -1,7 +1,7 @@
-import {exec} from 'child_process';
+import { exec } from 'child_process';
 import Promise from 'bluebird';
-import {Pull} from 'simple-git';
-import {hostname} from 'os';
+import { Pull } from 'simple-git';
+import { hostname } from 'os';
 import NpmInstall from 'npmi';
 
 if (!process.env.GLAUNCHER) {
@@ -56,10 +56,10 @@ if (!process.env.GLAUNCHER) {
     if (isObject(target) && isObject(source)) {
       Object.keys(source).forEach(key => {
         if (isObject(source[key])) {
-          if (!target[key]) Object.assign(target, {[key]: {}});
+          if (!target[key]) Object.assign(target, { [key]: {} });
           mergeDeep(target[key], source[key]);
         } else {
-          Object.assign(target, {[key]: source[key]});
+          Object.assign(target, { [key]: source[key] });
         }
       });
     }
@@ -142,14 +142,14 @@ if (!process.env.GLAUNCHER) {
    *
    * @param command
    * @param envs
- * @returns {Promise}
+   * @returns {Promise}
    */
   function execCommand(command, envs) {
     console.log(`GLAUNCHER: Starting your app... (${command})`);
     return new Promise(function (resolve, reject) {
       console.log(config.env);
       const proc = exec(command, {
-       env: envs
+        env: envs
       });
 
       setTimeout(resolve, 15000);
@@ -167,14 +167,15 @@ if (!process.env.GLAUNCHER) {
   gitPull(config.gitPull, config.gitRemote, config.gitBranch, config.retries)
     .timeout(60000) // 6o second timeout
     .then(function () {
-      return npmInstall(config.npmInstall, config.npmInstallOptions, config.retries)
-        .timeout(60000); // 60 second timeout
+      return npmInstall(config.npmInstall, config.npmInstallOptions, config.retries).timeout(60000)
+    })
     .then(function () {
       return execCommand(config.execCommand, config.env)
+    })
     .then(()=> {
       process.exit();
     })
-    .catch(error => { {
+    .catch(error => {
       throw error;
     });
 }
