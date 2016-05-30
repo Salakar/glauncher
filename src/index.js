@@ -167,24 +167,14 @@ if (!process.env.GLAUNCHER) {
   gitPull(config.gitPull, config.gitRemote, config.gitBranch, config.retries)
     .timeout(60000) // 6o second timeout
     .then(function () {
-      npmInstall(config.npmInstall, config.npmInstallOptions, config.retries)
-        .timeout(60000) // 60 second timeout
-        .then(function () {
-          execCommand(config.execCommand, config.env)
-            .then(()=> {
-              process.exit();
-            })
-            .catch((error) => {
-              throw error
-            });
-        })
-        .catch(function (error) {
-          throw error;
-        })
+      return npmInstall(config.npmInstall, config.npmInstallOptions, config.retries)
+        .timeout(60000); // 60 second timeout
+    .then(function () {
+      return execCommand(config.execCommand, config.env)
+    .then(()=> {
+      process.exit();
     })
-    .catch(function (error) {
+    .catch(error => { {
       throw error;
     });
-
 }
-
