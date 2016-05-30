@@ -1,5 +1,5 @@
 {
-  "name": "glauncher-sample",
+  "name": "glauncher",
   "description": "Automatically boots your node app on google cloud compute instances using the startup script meta. This pulls the latest changes from the branch you specified, runs npm install and the execs the app. Useful for Google Cloud load balanced instances that automatically scale. ",
   "version": "0.1.0",
   "main": "lib/index.js",
