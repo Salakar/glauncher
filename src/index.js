@@ -1,6 +1,6 @@
 import { exec } from 'child_process';
 import Promise from 'bluebird';
-import { pull } from 'simple-git';
+var simpleGit = require('simple-git')(process.cwd());
 import { hostname } from 'os';
 import NpmInstall from 'npmi';
 
@@ -80,7 +80,7 @@ if (!process.env.GLAUNCHER) {
         return resolve();
       }
       console.log('GLAUNCHER: Beginning Git Pull...');
-      pull(remote, branch, function (err) {
+      simpleGit.pull(remote, branch, function (err) {
         if (err && err.includes('fatal: Not a git repository')) {
           console.error('Your project is not a git repository. Launch aborted.');
           return process.exit();
@@ -146,13 +146,12 @@ if (!process.env.GLAUNCHER) {
    */
   function execCommand(command, envs) {
     console.log(`GLAUNCHER: Starting your app... (${command})`);
-    return new Promise(function (resolve, reject) {
+    return new Promise(function (resolve) {
       console.log(config.env);
-      const proc = exec(command, {
+      exec(command, {
         env: envs
-      });
-
-      setTimeout(resolve, 15000);
+      }).unref();
+      setTimeout(resolve, 1000);
     });
   }
 
