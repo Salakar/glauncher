@@ -80,7 +80,7 @@ if (!process.env.GLAUNCHER) {
         return resolve();
       }
       console.log('GLAUNCHER: Beginning Git Pull...');
-      Pull(remote, branch, function (err) {
+      pull(remote, branch, function (err) {
         if (err && err.includes('fatal: Not a git repository')) {
           console.error('Your project is not a git repository. Launch aborted.');
           return process.exit();
