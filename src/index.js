@@ -1,6 +1,6 @@
 import { exec } from 'child_process';
 import Promise from 'bluebird';
-import { Pull } from 'simple-git';
+import { pull } from 'simple-git';
 import { hostname } from 'os';
 import NpmInstall from 'npmi';
 
